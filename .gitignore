@@ -6,3 +6,4 @@ Homestead.json
 project.sublime-project
 .env
 project.sublime-workspace
+storage/debugbar
