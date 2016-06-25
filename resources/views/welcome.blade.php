@@ -1,45 +1,32 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layout.main')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
+@section('content')
+<div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+        <!-- Login Box -->
+        <div id="login-box" class="panel panel-primary">
+            <div class="panel-heading"><!-- Login --></div>
+            <div class="panel-body">
+                @if($errors->count())
+                    <div class="alert alert-danger">
+                        @foreach($errors->all('<dd>:message</dd>') as $error)
+                            {!! $error !!}
+                        @endforeach
+                    </div>
+                @endif
+                <form action="{{route('login')}}" class="form" method="post">
+                    <input name="_token" type="hidden" value="{!! csrf_token() !!}">
+                    <div class="form-group">
+                        <input id="email" name="email" type="email" placeholder="Email Address" class="form-control input-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <input id="password" name="password" type="password" placeholder="Password" class="form-control input-sm" required>
+                    </div>
+                    <button class="btn btn-sm btn-default">Masuk</button>
+                    <a href="{{route('register')}}" class="btn btn-sm btn-success">Daftar</a>
+                </form>
             </div>
-        </div>
-    </body>
-</html>
+        </div> <!-- / end of login box -->
+    </div>
+</div>
+@endsection

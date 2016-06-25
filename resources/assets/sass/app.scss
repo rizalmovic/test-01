@@ -1,2 +1,13 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+body {
+    font-family: 'Lato', 'Helvetica Neue', Arial;
+}
 
+body.login {
+    padding-top: 40px;
+}
+
+form sup {
+    top: -0.2em;
+    font-size: 0.7em;
+    color: #f00;
+}
