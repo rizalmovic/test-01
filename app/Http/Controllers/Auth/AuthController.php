@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use Validator;
+use Auth;
+use App\Models\User;
+use App\Contracts\User as UserInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\loginRequest;
+use App\Http\Requests\registerRequest;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -25,18 +29,26 @@ class AuthController extends Controller
 
     /**
      * Where to redirect users after login / registration.
-     *
      * @var string
      */
     protected $redirectTo = '/';
+
+    /**
+     * Setu register view
+     * @var string
+     */
+    protected $registerView = 'auth.register';
+
+    public $repo;
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserInterface $repo)
     {
+        $this->repo = $repo;
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
@@ -68,5 +80,10 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function postRegister(registerRequest $request)
+    {
+        return $this->register($request);
     }
 }

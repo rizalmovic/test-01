@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['uses' => 'MainController@index', 'as' => 'index']);
+Route::get('register', ['uses' => 'Auth\AuthController@getRegister', 'as' => 'register']);
+Route::post('register', ['uses' => 'Auth\AuthController@postRegister', 'as' => 'postRegister']);
+Route::post('login', ['uses' => 'Auth\AuthController@postLogin', 'as' => 'login']);
+Route::get('logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'logout']);
